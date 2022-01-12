@@ -1,16 +1,74 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body,
+  html {
+    @apply min-h-screen w-full flex flex-col overflow-x-hidden bg-gray-650 text-gray-200;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  #__next {
+    @apply min-h-screen;
+  }
+
+  a {
+    @apply text-blue-200 font-semibold hover:text-gray-100;
+  }
+
+  input {
+    @apply bg-gray-800 px-2 py-1;
+  }
+
+  select {
+    @apply bg-gray-800 px-2 py-1;
+  }
+
+  h1 {
+    @apply text-5xl mb-8;
+  }
+
+  h1 > small {
+    @apply block text-base ml-2;
+  }
+
+  h2 {
+    @apply text-3xl mb-4;
+  }
+
+  th,
+  td {
+    @apply py-1 px-2 align-middle text-left;
+  }
+
+  th {
+    @apply bg-gray-800;
+  }
+
+  table > tbody > tr > td {
+    @apply align-middle bg-gray-700;
+  }
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.react-tabs__tab-list {
+  @apply bg-gray-900;
+  border: 0 !important;
+  margin: 0 !important;
 }
 
-* {
-  box-sizing: border-box;
+.react-tabs__tab {
+  padding: 1rem 2rem !important;
+  border: 0 !important;
+}
+
+.react-tabs__tab--selected {
+  @apply bg-gray-800 text-gray-200 font-bold !important;
+  border: 0 !important;
+}
+
+.react-tabs__tab-panel.react-tabs__tab-panel--selected {
+  @apply bg-gray-700 px-4 py-2;
 }
