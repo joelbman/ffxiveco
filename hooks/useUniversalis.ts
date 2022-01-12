@@ -128,7 +128,7 @@ const useUniversalis = (world: string) => {
     return formattedResponse;
   };
 
-  return { getItemPrices, getCraftingCost };
+  return { getItemPrices, getCraftingCost, getAveragePrice };
 };
 
 export default useUniversalis;

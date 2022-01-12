@@ -6,6 +6,7 @@ import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import Error from '../../components/Error';
 import Layout from '../../components/Layout';
 import Loader from '../../components/Loader';
+import GilIcon from '../../components/icons/GilIcon';
 import { WorldContext } from '../../context/WorldContext';
 import useUniversalis, { CraftMaterial } from '../../hooks/useUniversalis';
 
@@ -13,12 +14,6 @@ interface TabContentProps {
   item: Record<string, string | number>;
   hq?: boolean;
 }
-
-const GilIcon = () => (
-  <figure className="inline-flex items-center justify-center w-4 h-4 ml-1">
-    <Image alt="Gil" src="https://xivapi.com/i/065000/065002.png" width="18" height="18" />
-  </figure>
-);
 
 const TabContent = ({ item, hq }: TabContentProps) => (
   <>

@@ -1,0 +1,29 @@
+{
+  "Aphorism": [
+    {
+      "cost": 20,
+      "id": 36220,
+      "name": "Thavnairian Horsetail"
+    },
+    {
+      "cost": 20,
+      "id": 36219,
+      "name": "Alchemical Abrasive"
+    },
+    {
+      "cost": 20,
+      "id": 36222,
+      "name": "Amynodon Hide"
+    },
+    {
+      "cost": 20,
+      "id": 36218,
+      "name": "Alchemical Charcoal"
+    },
+    {
+      "cost": 20,
+      "id": 36221,
+      "name": "Thavnairian Thread"
+    }
+  ]
+}
