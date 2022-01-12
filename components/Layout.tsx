@@ -10,8 +10,11 @@ const Layout = ({ children }: Props) => {
   return (
     <div>
       <Head>
-        <title>FFXIV Price Tools</title>
-        <meta name="description" content="FFXIV Price check tools" />
+        <title>FFXIV Eco</title>
+        <meta
+          name="description"
+          content="FFXIV Economy tools - crafting profits, tomestone/scrip item to gil ratios etc."
+        />
       </Head>
 
       <NavBar />
