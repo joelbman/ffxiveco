@@ -16,6 +16,7 @@ export interface CraftMaterial {
 
 interface RequestParams {
   hq?: boolean;
+  listings?: number;
 }
 
 interface Listing {
@@ -40,7 +41,7 @@ const useUniversalis = (world: string) => {
     return axios.get(
       `https://universalis.app/api/${world}/${
         typeof itemIds === 'string' ? itemIds : itemIds.join(',')
-      }?listings=5${hqStr}`
+      }?listings=${params?.listings ? params.listings : 5}${hqStr}`
     );
   };
 
@@ -58,8 +59,8 @@ const useUniversalis = (world: string) => {
       materials: [] as CraftMaterial[],
     };
 
-    const universalisNQ = await getItemPrices(id, { hq: false });
-    const universalisHQ = await getItemPrices(id, { hq: true });
+    const universalisNQ = await getItemPrices(id, { hq: false, listings: 3 });
+    const universalisHQ = await getItemPrices(id, { hq: true, listings: 3 });
     const xivreq = await getItem(id);
 
     formattedResponse.name = xivreq.data.Name;
