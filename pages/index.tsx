@@ -21,8 +21,7 @@ const Home = () => {
 
       <h2>Coming Soon ™️</h2>
       <ul className="list-disc pl-8">
-        <li>Tomestone material gil value comparsion</li>
-        <li>White & Purple scrips gil value comparsion (Materias vs reagents etc.)</li>
+        <li>White & Purple scrips gil currency conversion (Materias vs reagents etc.)</li>
       </ul>
     </Layout>
   );
