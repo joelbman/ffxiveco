@@ -1,6 +1,6 @@
 # FFXIV Price Check Tools
 
-Currently under development. Uses [Universalis API](https://universalis.app) to check item prices and [XIVApi](https://xivapi.com)to retrieve item/recipe data & icons.
+Currently under development. Uses [Universalis API](https://universalis.app) to check item prices and [XIVApi](https://xivapi.com) to retrieve item/recipe data & icons.
 
 Found a bug or have any suggestions? Contact me on Discord: so0le#5155
 
