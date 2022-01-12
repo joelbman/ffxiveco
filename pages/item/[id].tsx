@@ -1,5 +1,5 @@
-import Image from 'next/Image';
 import { useRouter } from 'next/dist/client/router';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
