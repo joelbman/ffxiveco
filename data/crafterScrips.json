@@ -1,0 +1,69 @@
+{
+  "purple": {
+    "iconId": "065088",
+    "items": [
+      {
+        "cost": 15,
+        "id": 36100,
+        "name": "Giant Pumpkin"
+      },
+      {
+        "cost": 15,
+        "id": 36102,
+        "name": "Subtle Cinnamon Sticks"
+      },
+      {
+        "cost": 500,
+        "id": 33940,
+        "name": "Craftsman's Command Materia X"
+      },
+      {
+        "cost": 500,
+        "id": 33939,
+        "name": "Craftsman's Cunning Materia X"
+      },
+      {
+        "cost": 500,
+        "id": 33938,
+        "name": "Craftsman's Competence Materia X"
+      }
+    ],
+    "name": "Purple Crafter's Scrip"
+  },
+  "white": {
+    "iconId": "065070",
+    "items": [
+      {
+        "cost": 200,
+        "id": 25196,
+        "name": "Craftsman's Command Materia VII"
+      },
+      {
+        "cost": 200,
+        "id": 25195,
+        "name": "Craftsman's Cunning Materia VII"
+      },
+      {
+        "cost": 200,
+        "id": 25194,
+        "name": "Craftsman's Competence Materia VII"
+      },
+      {
+        "cost": 250,
+        "id": 33927,
+        "name": "Craftsman's Command Materia IX"
+      },
+      {
+        "cost": 250,
+        "id": 33926,
+        "name": "Craftsman's Cunning Materia IX"
+      },
+      {
+        "cost": 250,
+        "id": 33925,
+        "name": "Craftsman's Competence Materia IX"
+      }
+    ],
+    "name": "White Crafter's Scrip"
+  }
+}

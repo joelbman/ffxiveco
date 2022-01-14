@@ -3,19 +3,18 @@ import CurrencyTable from '../../components/CurrencyTable';
 import Error from '../../components/Error';
 import Layout from '../../components/Layout';
 import Loader from '../../components/Loader';
-import GilIcon from '../../components/icons/GilIcon';
 import ItemIcon from '../../components/icons/ItemIcon';
 import { WorldContext } from '../../context/WorldContext';
-import tomestoneData from '../../data/tomestone.json';
+import scripData from '../../data/crafterScrips.json';
 import useUniversalis from '../../hooks/useUniversalis';
-import { getRelativeTime } from '../../util/relativeTime';
 
-const Tomestone = () => {
+const Crafter = () => {
   const { world } = useContext(WorldContext);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const { getCurrencyRatios } = useUniversalis(world);
-  const [data, setData] = useState<any>();
+  const [whiteScripData, setWhiteScripData] = useState<any>();
+  const [purpleScripData, setPurpleScripData] = useState<any>();
 
   useEffect(() => {
     if (!world) {
@@ -27,8 +26,10 @@ const Tomestone = () => {
       setError(false);
 
       try {
-        const items = await getCurrencyRatios(tomestoneData.Aphorism.items);
-        setData(items);
+        const itemsW = await getCurrencyRatios(scripData.white.items);
+        const itemsP = await getCurrencyRatios(scripData.purple.items);
+        setWhiteScripData(itemsW);
+        setPurpleScripData(itemsP);
         setError(false);
       } catch (e) {
         setError(true);
@@ -57,23 +58,37 @@ const Tomestone = () => {
 
   return (
     <Layout>
-      <h1>Tomestone conversion rates</h1>
+      <h1>Crafter&apos;s scrip conversion rates</h1>
 
-      <h2 className="flex">
-        <ItemIcon
-          className="mr-2"
-          iconId={tomestoneData.Aphorism.iconId}
-          name={tomestoneData.Aphorism.name}
+      <div>
+        <h2 className="flex mb-0">
+          <ItemIcon
+            className="mr-2"
+            iconId={scripData.purple.iconId}
+            name="Purple Crafter's Scrip"
+          />
+          Purple scrips
+        </h2>
+        <CurrencyTable
+          data={purpleScripData}
+          iconId={scripData.purple.iconId}
+          name="Purple Crafter's Scrip"
         />
-        Aphorism
-      </h2>
-      <CurrencyTable
-        data={data}
-        iconId={tomestoneData.Aphorism.iconId}
-        name={tomestoneData.Aphorism.name}
-      />
+      </div>
+
+      <div>
+        <h2 className="flex mt-8 mb-0">
+          <ItemIcon iconId={scripData.white.iconId} name="White Crafter's Scrip" />
+          White scrips
+        </h2>
+        <CurrencyTable
+          data={whiteScripData}
+          iconId={scripData.white.iconId}
+          name="White Crafter's Scrip"
+        />
+      </div>
     </Layout>
   );
 };
 
-export default Tomestone;
+export default Crafter;

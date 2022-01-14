@@ -5,11 +5,23 @@ import React, { useContext, useRef, useState } from 'react';
 import { WorldContext } from '../context/WorldContext';
 import useXIVApi from '../hooks/useXIVApi';
 
+interface DropdownItemProps {
+  href: string;
+  children: React.ReactNode;
+}
+
+const DropdownItem = ({ href, children }: DropdownItemProps) => (
+  <Link passHref href={href}>
+    <a className="px-2 py-1 w-48 text-gray-200">{children}</a>
+  </Link>
+);
+
 const NavBar = () => {
   const router = useRouter();
   const { searchItem } = useXIVApi();
   const [searchString, setSearchString] = useState('');
   const [resultsOpen, setResultsOpen] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const [results, setResults] = useState<any[]>([]);
   const { world, updateWorld } = useContext(WorldContext);
 
@@ -41,9 +53,9 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="flex justify-center fixed w-full top-0 left-0 h-12 bg-gray-900 z-30">
+    <nav className="flex justify-center items-center fixed w-full top-0 left-0 h-12 bg-gray-900 z-30">
       <div className="container">
-        <div className="flex flex-row justify-between items-center py-2">
+        <div className="flex flex-row justify-between items-center">
           <section className="flex flex-row items-center">
             <Link passHref href="/">
               <a className="text-2xl mr-4">
@@ -60,9 +72,27 @@ const NavBar = () => {
               </a>
             </Link>
 
-            <Link passHref href="/conversion/tomestone/">
-              <a>Tomestone</a>
-            </Link>
+            <div
+              className="relative py-1 cursor-pointer"
+              onClick={() => setShowDropdown(!showDropdown)}
+              onMouseEnter={() => setShowDropdown(true)}
+              onMouseLeave={() => setShowDropdown(false)}
+              role="button"
+            >
+              Currencies
+              {showDropdown && (
+                <div
+                  className="flex flex-col absolute top-8 -left-1 bg-gray-900"
+                  role="menu"
+                  style={{ maxWidth: '560px' }}
+                  onMouseEnter={() => setShowDropdown(true)}
+                >
+                  <DropdownItem href="/conversion/tomestone/">Tomestone</DropdownItem>
+                  <DropdownItem href="/conversion/crafter/">Crafter scrips</DropdownItem>
+                  <DropdownItem href="/conversion/gatherer/">Gatherer scrips</DropdownItem>
+                </div>
+              )}
+            </div>
           </section>
 
           <section className="relative">

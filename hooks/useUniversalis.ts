@@ -24,6 +24,12 @@ interface Listing {
   [key: string]: unknown;
 }
 
+interface CurrencyItem {
+  cost: number;
+  id: number;
+  name: string;
+}
+
 const getAveragePrice = (listings: Listing[]) => {
   const sum = listings.reduce((a: number, b: Listing) => a + b['pricePerUnit'], 0);
   return Math.round(sum / listings.length);
@@ -128,7 +134,23 @@ const useUniversalis = (world: string) => {
     return formattedResponse;
   };
 
-  return { getItemPrices, getCraftingCost, getAveragePrice };
+  const getCurrencyRatios = async (items: CurrencyItem[]) => {
+    const res = await getItemPrices(items.map((i) => i.id.toString()));
+    return items
+      .map((i) => {
+        const item = res.data.items.find((it: any) => it.itemID === i.id);
+        item.avgPrice = getAveragePrice(item?.listings);
+        return {
+          ...i,
+          updated: getRelativeTime(item.lastUploadTime),
+          gilRatio: item.avgPrice / i.cost,
+          avgPrice: item.avgPrice,
+        };
+      })
+      .sort((a, b) => b.gilRatio - a.gilRatio);
+  };
+
+  return { getItemPrices, getCraftingCost, getAveragePrice, getCurrencyRatios };
 };
 
 export default useUniversalis;

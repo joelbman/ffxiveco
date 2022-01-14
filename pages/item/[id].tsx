@@ -57,6 +57,10 @@ const ItemDetail = () => {
   const { id } = router.query;
 
   useEffect(() => {
+    if (!world) {
+      return;
+    }
+
     const fetchData = async (itemId: string) => {
       setLoading(true);
       setError(false);

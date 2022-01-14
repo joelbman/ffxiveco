@@ -19,7 +19,7 @@ const Layout = ({ children }: Props) => {
 
       <NavBar />
 
-      <main className="mt-20 px-8 flex flex-col items-center" style={{ minHeight: '90vh' }}>
+      <main className="mt-20 px-8 pb-20 flex flex-col items-center" style={{ minHeight: '90vh' }}>
         <div className="container">{children}</div>
       </main>
 
