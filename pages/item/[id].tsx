@@ -71,7 +71,6 @@ const ItemDetail = () => {
 
       try {
         const data = await getCraftingCost(itemId);
-        console.log(data);
         setItem(data);
       } catch (e) {
         console.log(e);
@@ -90,8 +89,6 @@ const ItemDetail = () => {
   if (loading) {
     return <Loader />;
   }
-
-  console.log(item);
 
   if (error || !item) {
     return (
