@@ -61,8 +61,8 @@ const Gatherer = () => {
       <h1>Gatherer&apos;s scrip conversion rates</h1>
 
       <p className="mb-8" style={{ maxWidth: '640px' }}>
-        Fishing bait are on separate tables as they update less frequently on the Universalis API.
-        They can be worth investing in to but it&apos;s better to check the current prices in-game.
+        Fishing bait are not included as they update very infrequently on the Universalis API. They
+        can be worth investing in to but it&apos;s better to check the current prices in-game.
       </p>
 
       <div>
@@ -81,13 +81,13 @@ const Gatherer = () => {
           name="Purple Gatherer's Scrip"
         />
 
-        <h3>Fishing bait</h3>
+        {/* <h3>Fishing bait</h3>
         <CurrencyTable
           data={purpleScripData}
           bait
           iconId={scripData.purple.iconId}
           name="Purple Gatherer's Scrip"
-        />
+        /> */}
       </div>
 
       <div className="mt-12">
@@ -106,13 +106,13 @@ const Gatherer = () => {
           name="White Gatherer's Scrip"
         />
 
-        <h3>Fishing bait</h3>
+        {/* <h3>Fishing bait</h3>
         <CurrencyTable
           data={whiteScripData}
           iconId={scripData.white.iconId}
           name="White Gatherer's Scrip"
           bait
-        />
+        /> */}
       </div>
     </Layout>
   );
