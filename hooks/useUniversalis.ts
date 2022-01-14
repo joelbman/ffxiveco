@@ -76,7 +76,7 @@ const useUniversalis = (world: string) => {
     formattedResponse.updated = getRelativeTime(universalisNQ.data.lastUploadTime) || '';
 
     // If searched item is craftable look for material prices
-    if (xivreq.data.GameContentLinks.Recipe.ItemResult[0]) {
+    if (xivreq.data.GameContentLinks.Recipe?.ItemResult) {
       const recipeId = xivreq.data.GameContentLinks.Recipe.ItemResult[0];
 
       if (recipeId) {

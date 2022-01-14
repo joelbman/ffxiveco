@@ -60,15 +60,15 @@ const Gatherer = () => {
     <Layout>
       <h1>Gatherer&apos;s scrip conversion rates</h1>
 
-      <p className="mb-8" style={{ maxWidth: '610px' }}>
-        Fishing bait are on separate tables as they update slowly on the Universalis API. They can
-        be worth investing in to, but it&apos;s better to check the current prices in-game.
+      <p className="mb-8" style={{ maxWidth: '640px' }}>
+        Fishing bait are on separate tables as they update less frequently on the Universalis API.
+        They can be worth investing in to but it&apos;s better to check the current prices in-game.
       </p>
 
       <div>
-        <h2>
+        <h2 className="flex">
           <ItemIcon
-            className="ml-2"
+            className="mr-2"
             iconId={scripData.purple.iconId}
             name="Purple Gatherer's Scrip"
           />
@@ -90,9 +90,13 @@ const Gatherer = () => {
         />
       </div>
 
-      <div className="mt-8">
-        <h2 className="flex items-center">
-          <ItemIcon iconId={scripData.white.iconId} name="White Gatherer's Scrip" />
+      <div className="mt-12">
+        <h2 className="flex">
+          <ItemIcon
+            className="mr-2"
+            iconId={scripData.white.iconId}
+            name="White Gatherer's Scrip"
+          />
           White scrips
         </h2>
         <h3>Materia & Materials</h3>

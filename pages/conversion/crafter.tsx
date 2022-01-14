@@ -77,7 +77,7 @@ const Crafter = () => {
       </div>
 
       <div>
-        <h2 className="flex mt-8 mb-0">
+        <h2 className="flex mt-12 mb-0">
           <ItemIcon iconId={scripData.white.iconId} name="White Crafter's Scrip" />
           White scrips
         </h2>

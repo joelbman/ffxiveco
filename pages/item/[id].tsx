@@ -18,7 +18,7 @@ interface TabContentProps {
 const TabContent = ({ item, hq }: TabContentProps) => (
   <>
     {item.craftQuantity > 1 && <div>Items produced per craft: {item.craftQuantity}</div>}
-    {item.craftingCost && (
+    {item.craftingCost > 0 && (
       <div className="flex items-center">
         Total material cost per craft: {item.craftingCost} <GilIcon />
       </div>
@@ -28,22 +28,26 @@ const TabContent = ({ item, hq }: TabContentProps) => (
       Average unit price: {hq ? item.avgPriceHQ : item.avgPriceNQ} <GilIcon />
     </div>
 
-    <div className="flex items-center text-xl mt-4">
-      <div>
-        Profit/Loss per craft:{' '}
-        {hq && (
-          <span className={item.profitHQ > 0 ? 'text-green-500' : 'text-red-500'}>
-            {item.profitHQ}
-          </span>
-        )}
-        {!hq && (
-          <span className={item.profitNQ > 0 ? 'text-green-500' : 'text-red-500'}>
-            {item.profitNQ}
-          </span>
-        )}
+    {item.profitHQ || item.profitNQ ? (
+      <div className="flex items-center text-xl mt-4">
+        <div>
+          Profit/Loss per craft:{' '}
+          {hq && (
+            <span className={item.profitHQ > 0 ? 'text-green-500' : 'text-red-500'}>
+              {item.profitHQ}
+            </span>
+          )}
+          {!hq && (
+            <span className={item.profitNQ > 0 ? 'text-green-500' : 'text-red-500'}>
+              {item.profitNQ}
+            </span>
+          )}
+        </div>
+        <GilIcon />
       </div>
-      <GilIcon />
-    </div>
+    ) : (
+      <div className="mt-6 italic">More details on non-craftable items coming soon.</div>
+    )}
   </>
 );
 
@@ -67,8 +71,10 @@ const ItemDetail = () => {
 
       try {
         const data = await getCraftingCost(itemId);
+        console.log(data);
         setItem(data);
       } catch (e) {
+        console.log(e);
         setError(true);
       }
 
@@ -85,7 +91,9 @@ const ItemDetail = () => {
     return <Loader />;
   }
 
-  if (error || (!item.avgPriceNQ && !item.avgPriceHQ)) {
+  console.log(item);
+
+  if (error || !item) {
     return (
       <Error>
         <h1>Error</h1>
