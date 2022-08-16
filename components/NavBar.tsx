@@ -142,6 +142,8 @@ const NavBar = () => {
               <option value="Omega">Omega</option>
               <option value="Ragnarok">Ragnarok</option>
               <option value="Spriggan">Spriggan</option>
+              <option value="Sagittarius">Sagittarius</option>
+              <option value="Phantom">Phantom</option>
             </select>
           </section>
         </div>

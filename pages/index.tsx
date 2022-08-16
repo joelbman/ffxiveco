@@ -25,7 +25,7 @@ const Home = () => {
 
       <h2>Coming Soon ™️</h2>
       <ul className="list-disc pl-8">
-        <li>- Skybuilder&apos;s scrip conversion rates</li>
+        <li>Skybuilder&apos;s scrip conversion rates</li>
       </ul>
     </Layout>
   );
