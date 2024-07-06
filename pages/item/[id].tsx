@@ -10,8 +10,17 @@ import GilIcon from '../../components/icons/GilIcon';
 import { WorldContext } from '../../context/WorldContext';
 import useUniversalis, { CraftMaterial } from '../../hooks/useUniversalis';
 
+interface Item {
+  craftQuantity: number;
+  craftingCost: number;
+  profitHQ: number;
+  profitNQ: number;
+  avgPriceHQ: number;
+  avgPriceNQ: number;
+}
+
 interface TabContentProps {
-  item: Record<string, string | number>;
+  item: Item;
   hq?: boolean;
 }
 
@@ -155,20 +164,22 @@ const ItemDetail = () => {
               {item.materials.map((m: CraftMaterial) => (
                 <tr key={m.id}>
                   <td className="w-12">
-                    <Link href={`/item/${m.id}`} passHref>
-                      <a className="flex items-center justify-center">
-                        <Image
-                          src={`https://xivapi.com/${m.iconUrl}`}
-                          width="36"
-                          height="36"
-                          alt={m.name}
-                        />
-                      </a>
+                    <Link
+                      href={`/item/${m.id}`}
+                      passHref
+                      className="flex items-center justify-center"
+                    >
+                      <Image
+                        src={`https://xivapi.com/${m.iconUrl}`}
+                        width="36"
+                        height="36"
+                        alt={m.name}
+                      />
                     </Link>
                   </td>
                   <td>
-                    <Link href={`/item/${m.id}`} passHref>
-                      <a className="flex items-center">{m.name}</a>
+                    <Link href={`/item/${m.id}`} passHref className="flex items-center">
+                      {m.name}
                     </Link>
                   </td>
                   <td>{m.amount}</td>

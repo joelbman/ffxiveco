@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="flex justify-center items-center text-sm w-full fixed bottom-0 left-0 py-2 bg-gray-900">
       <div className="container flex flex-row justify-center items-center">
         Contact: so0le#5155 @ Discord -
-        <a href="https://github.com/joelbman/ffxiv-pc-tools/" target="_blank" rel="noreferrer">
+        <a href="https://github.com/joelbman/ffxiveco/" target="_blank" rel="noreferrer">
           <svg
             stroke="currentColor"
             fill="currentColor"

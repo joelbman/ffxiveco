@@ -27,15 +27,13 @@ const ItemIcon = ({ iconId, itemId, name, className, size }: Props) => {
   }
 
   return (
-    <Link href={`/item/${itemId}`} passHref>
-      <a className="flex items-center justify-center">
-        <Image
-          src={`https://xivapi.com/i/${iconId.toString().slice(0, 3)}000/${iconId}.png`}
-          width={iconSize}
-          height={iconSize}
-          alt={name}
-        />
-      </a>
+    <Link href={`/item/${itemId}`} passHref className="flex items-center justify-center">
+      <Image
+        src={`https://xivapi.com/i/${iconId.toString().slice(0, 3)}000/${iconId}.png`}
+        width={iconSize}
+        height={iconSize}
+        alt={name}
+      />
     </Link>
   );
 };

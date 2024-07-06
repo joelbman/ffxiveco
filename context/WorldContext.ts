@@ -1,11 +1,11 @@
-import React from 'react';
+import { createContext } from 'react';
 
 interface WorldCtx {
   world: string;
   updateWorld: (world: string) => void;
 }
 
-export const WorldContext = React.createContext<WorldCtx>({
+export const WorldContext = createContext<WorldCtx>({
   world: '',
   updateWorld: () => null,
 });

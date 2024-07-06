@@ -1,6 +1,8 @@
+const { hostname } = require('os');
+
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['xivapi.com'],
+    remotePatterns: [{ protocol: 'https', hostname: 'xivapi.com' }],
   },
 };

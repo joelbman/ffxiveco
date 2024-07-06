@@ -1,13 +1,11 @@
 import axios from 'axios';
-import { useContext } from 'react';
-import { WorldContext } from '../context/WorldContext';
 import { getRelativeTime } from '../util/relativeTime';
 import useXIVApi from './useXIVApi';
 
 export interface CraftMaterial {
   id: number;
   name: string;
-  updated: string;
+  updated?: string;
   iconUrl: string;
   amount: number;
   avgPrice: number;
@@ -45,7 +43,7 @@ const useUniversalis = (world: string) => {
     }
 
     return axios.get(
-      `https://universalis.app/api/${world}/${
+      `https://universalis.app/api/v2/${world}/${
         typeof itemIds === 'string' ? itemIds : itemIds.join(',')
       }?listings=${params?.listings ? params.listings : 5}${hqStr}`
     );
@@ -66,12 +64,12 @@ const useUniversalis = (world: string) => {
     };
 
     const universalisNQ = await getItemPrices(id, { hq: false, listings: 3 });
-    const universalisHQ = await getItemPrices(id, { hq: true, listings: 3 });
+    // const universalisHQ = await getItemPrices(id, { hq: true, listings: 3 });
     const xivreq = await getItem(id);
 
     formattedResponse.name = xivreq.data.Name;
     formattedResponse.icon = xivreq.data.IconHD;
-    formattedResponse.avgPriceHQ = getAveragePrice(universalisHQ.data.listings);
+    // formattedResponse.avgPriceHQ = getAveragePrice(universalisHQ.data.listings);
     formattedResponse.avgPriceNQ = getAveragePrice(universalisNQ.data.listings);
     formattedResponse.updated = getRelativeTime(universalisNQ.data.lastUploadTime) || '';
 
@@ -88,8 +86,8 @@ const useUniversalis = (world: string) => {
           if (materialId) {
             formattedResponse.materials.push({
               id: materialId,
-              name: recipeReq.data['ItemIngredient' + i].Name,
-              iconUrl: recipeReq.data['ItemIngredient' + i].Icon,
+              name: recipeReq.data[`ItemIngredient${i.toString()}`]?.Name,
+              iconUrl: recipeReq.data[`ItemIngredient${i.toString()}`]?.Icon,
               amount: recipeReq.data['AmountIngredient' + i],
               updated: '',
               avgPrice: 0,
@@ -103,17 +101,19 @@ const useUniversalis = (world: string) => {
         formattedResponse.craftQuantity = recipeReq.data.AmountResult;
 
         const materialPrices = await getItemPrices(materialIds);
-        formattedResponse.materials = materialPrices.data.items.map((material: any) => {
-          const matIndex = formattedResponse.materials.findIndex((m) => m.id === material.itemID);
-          const avgPrice = getAveragePrice(material.listings);
+        formattedResponse.materials = Object.values(materialPrices.data.items).map(
+          (material: any) => {
+            const matIndex = formattedResponse.materials.findIndex((m) => m.id === material.itemID);
+            const avgPrice = getAveragePrice(material.listings);
 
-          return {
-            ...formattedResponse.materials[matIndex],
-            avgPrice,
-            updated: getRelativeTime(material.lastUploadTime),
-            avgTotalPrice: Math.round(avgPrice * formattedResponse.materials[matIndex].amount),
-          };
-        });
+            return {
+              ...formattedResponse.materials[matIndex],
+              avgPrice,
+              updated: getRelativeTime(material.lastUploadTime),
+              avgTotalPrice: Math.round(avgPrice * formattedResponse.materials[matIndex].amount),
+            };
+          }
+        );
 
         formattedResponse.craftingCost = formattedResponse.materials.reduce(
           (a, b) => a + b['avgTotalPrice'],
