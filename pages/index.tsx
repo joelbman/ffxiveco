@@ -5,7 +5,9 @@ const Home = () => {
     <Layout>
       <h1>FFXIV Economy tools</h1>
 
-      <p>Site is currently under development, only Chaos datacenter realms are supported. </p>
+      <p>
+        Site is currently under development, only Chaos & Light datacenter worlds are supported.
+      </p>
 
       <p>
         If you find any bugs or have any suggestions just yell at me on Discord (so0le#5155) or open

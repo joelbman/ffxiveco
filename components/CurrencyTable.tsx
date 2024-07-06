@@ -24,6 +24,8 @@ const CurrencyTable = ({ data, bait, iconId, name }: Props) => {
     ? data.filter((i) => i.type === 'bait')
     : data.filter((i) => i.type !== 'bait');
 
+  console.log(filtered);
+
   return (
     <table className="w-full mt-4 mb-8" style={{ maxWidth: '1024px' }}>
       <thead>

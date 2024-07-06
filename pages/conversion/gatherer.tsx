@@ -13,7 +13,6 @@ const Gatherer = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const { getCurrencyRatios } = useUniversalis(world);
-  const [whiteScripData, setWhiteScripData] = useState<any>();
   const [purpleScripData, setPurpleScripData] = useState<any>();
 
   useEffect(() => {
@@ -26,12 +25,11 @@ const Gatherer = () => {
       setError(false);
 
       try {
-        const itemsW = await getCurrencyRatios(scripData.white.items);
         const itemsP = await getCurrencyRatios(scripData.purple.items);
-        setWhiteScripData(itemsW);
         setPurpleScripData(itemsP);
         setError(false);
       } catch (e) {
+        console.log(e);
         setError(true);
       }
 
@@ -74,6 +72,7 @@ const Gatherer = () => {
           />
           Purple scrips
         </h2>
+
         <h3>Materia & Materials</h3>
         <CurrencyTable
           data={purpleScripData}
@@ -87,31 +86,6 @@ const Gatherer = () => {
           bait
           iconId={scripData.purple.iconId}
           name="Purple Gatherer's Scrip"
-        /> */}
-      </div>
-
-      <div className="mt-12">
-        <h2 className="flex">
-          <ItemIcon
-            className="mr-2"
-            iconId={scripData.white.iconId}
-            name="White Gatherer's Scrip"
-          />
-          White scrips
-        </h2>
-        <h3>Materia & Materials</h3>
-        <CurrencyTable
-          data={whiteScripData}
-          iconId={scripData.white.iconId}
-          name="White Gatherer's Scrip"
-        />
-
-        {/* <h3>Fishing bait</h3>
-        <CurrencyTable
-          data={whiteScripData}
-          iconId={scripData.white.iconId}
-          name="White Gatherer's Scrip"
-          bait
         /> */}
       </div>
     </Layout>

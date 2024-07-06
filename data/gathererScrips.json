@@ -3,65 +3,6 @@
     "iconId": "065087",
     "items": [
       {
-        "cost": 500,
-        "id": 33935,
-        "name": "Gatherer's Guerdon Materia X"
-      },
-      {
-        "cost": 500,
-        "id": 33937,
-        "name": "Gatherer's Grasp Materia X"
-      },
-      {
-        "cost": 500,
-        "id": 33936,
-        "name": "Gatherer's Guile Materia X"
-      },
-      {
-        "cost": 200,
-        "id": 36224,
-        "name": "Endstone Aethersand"
-      },
-      {
-        "cost": 200,
-        "id": 36226,
-        "name": "Endtide Aethersand"
-      },
-      {
-        "cost": 200,
-        "id": 36225,
-        "name": "Endwood Aethersand"
-      },
-      {
-        "cost": 100,
-        "id": 36223,
-        "name": "Moonlight Aethersand"
-      },
-      {
-        "cost": 5,
-        "id": 36591,
-        "name": "Mayfly",
-        "type": "bait"
-      },
-      {
-        "cost": 5,
-        "id": 36591,
-        "name": "Mackerel Strip",
-        "type": "bait"
-      },
-      {
-        "cost": 5,
-        "id": 36597,
-        "name": "Stardust",
-        "type": "bait"
-      }
-    ],
-    "name": "Purple Gatherer's Scrip"
-  },
-  "white": {
-    "iconId": "065069",
-    "items": [
-      {
         "cost": 5,
         "id": 27589,
         "name": "Baitbugs",
@@ -86,17 +27,22 @@
         "type": "bait"
       },
       {
-        "cost": 250,
+        "id": 41762,
+        "cost": 220,
+        "name": "Gatherer's Guerdon Materia XI"
+      },
+      {
+        "cost": 200,
         "id": 33922,
         "name": "Gatherer's Guerdon Materia IX"
       },
       {
-        "cost": 250,
+        "cost": 200,
         "id": 33924,
         "name": "Gatherer's Grasp Materia IX"
       },
       {
-        "cost": 250,
+        "cost": 200,
         "id": 33923,
         "name": "Gatherer's Guile Materia IX"
       },
@@ -116,6 +62,6 @@
         "name": "Gatherer's Guile Materia VII"
       }
     ],
-    "name": "White Gatherer's Scrip"
+    "name": "Purple Gatherer's Scrip"
   }
 }

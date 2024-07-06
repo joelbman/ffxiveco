@@ -138,13 +138,16 @@ const useUniversalis = (world: string) => {
     const res = await getItemPrices(items.map((i) => i.id.toString()));
     return items
       .map((i) => {
-        const item = res.data.items.find((it: any) => it.itemID === i.id);
+        const item = Object.values(res.data.items).find((it: any) => it.itemID === i.id) as Record<
+          string,
+          any
+        >;
         item.avgPrice = getAveragePrice(item?.listings);
         return {
           ...i,
           updated: getRelativeTime(item.lastUploadTime),
-          gilRatio: item.avgPrice / i.cost,
-          avgPrice: item.avgPrice,
+          gilRatio: item.avgPrice ? item.avgPrice / i.cost : 0,
+          avgPrice: item.avgPrice || '-',
         };
       })
       .sort((a, b) => b.gilRatio - a.gilRatio);

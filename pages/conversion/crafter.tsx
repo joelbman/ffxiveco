@@ -13,7 +13,6 @@ const Crafter = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const { getCurrencyRatios } = useUniversalis(world);
-  const [whiteScripData, setWhiteScripData] = useState<any>();
   const [purpleScripData, setPurpleScripData] = useState<any>();
 
   useEffect(() => {
@@ -26,9 +25,7 @@ const Crafter = () => {
       setError(false);
 
       try {
-        const itemsW = await getCurrencyRatios(scripData.white.items);
         const itemsP = await getCurrencyRatios(scripData.purple.items);
-        setWhiteScripData(itemsW);
         setPurpleScripData(itemsP);
         setError(false);
       } catch (e) {
@@ -73,18 +70,6 @@ const Crafter = () => {
           data={purpleScripData}
           iconId={scripData.purple.iconId}
           name="Purple Crafter's Scrip"
-        />
-      </div>
-
-      <div>
-        <h2 className="flex mt-12 mb-0">
-          <ItemIcon iconId={scripData.white.iconId} name="White Crafter's Scrip" />
-          White scrips
-        </h2>
-        <CurrencyTable
-          data={whiteScripData}
-          iconId={scripData.white.iconId}
-          name="White Crafter's Scrip"
         />
       </div>
     </Layout>
