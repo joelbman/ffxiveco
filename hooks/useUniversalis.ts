@@ -64,12 +64,12 @@ const useUniversalis = (world: string) => {
     };
 
     const universalisNQ = await getItemPrices(id, { hq: false, listings: 3 });
-    // const universalisHQ = await getItemPrices(id, { hq: true, listings: 3 });
+    const universalisHQ = await getItemPrices(id, { hq: true, listings: 3 });
     const xivreq = await getItem(id);
 
     formattedResponse.name = xivreq.data.Name;
     formattedResponse.icon = xivreq.data.IconHD;
-    // formattedResponse.avgPriceHQ = getAveragePrice(universalisHQ.data.listings);
+    formattedResponse.avgPriceHQ = getAveragePrice(universalisHQ.data.listings);
     formattedResponse.avgPriceNQ = getAveragePrice(universalisNQ.data.listings);
     formattedResponse.updated = getRelativeTime(universalisNQ.data.lastUploadTime) || '';
 

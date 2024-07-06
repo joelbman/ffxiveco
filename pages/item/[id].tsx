@@ -103,7 +103,10 @@ const ItemDetail = () => {
     return (
       <Error>
         <h1>Error</h1>
-        <p>Item data not found. Maybe the item is not marketable?</p>
+        <p>
+          Item data not found. Maybe the item is not marketable? This could also be caused by
+          Universalis API being down or under heavy load.
+        </p>
       </Error>
     );
   }

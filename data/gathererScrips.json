@@ -1,4 +1,14 @@
 {
+  "orange": {
+    "iconId": "065109",
+    "items": [
+      {
+        "id": 41762,
+        "cost": 220,
+        "name": "Gatherer's Guerdon Materia XII"
+      }
+    ]
+  },
   "purple": {
     "iconId": "065087",
     "items": [
@@ -28,7 +38,7 @@
       },
       {
         "id": 41762,
-        "cost": 220,
+        "cost": 250,
         "name": "Gatherer's Guerdon Materia XI"
       },
       {

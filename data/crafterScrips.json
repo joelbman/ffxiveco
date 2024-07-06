@@ -1,4 +1,14 @@
 {
+  "orange": {
+    "iconId": "065110",
+    "items": [
+      {
+        "cost": 500,
+        "id": 33927,
+        "name": "Craftsman's Command Materia XII"
+      }
+    ]
+  },
   "purple": {
     "iconId": "065088",
     "items": [
@@ -18,17 +28,17 @@
         "name": "Craftsman's Competence Materia VII"
       },
       {
-        "cost": 250,
+        "cost": 200,
         "id": 33927,
         "name": "Craftsman's Command Materia IX"
       },
       {
-        "cost": 250,
+        "cost": 200,
         "id": 33926,
         "name": "Craftsman's Cunning Materia IX"
       },
       {
-        "cost": 250,
+        "cost": 200,
         "id": 33925,
         "name": "Craftsman's Competence Materia IX"
       }
