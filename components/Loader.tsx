@@ -8,7 +8,7 @@ const Loader = () => {
         className="flex items-center justify-center overflow-hidden"
         style={{ minHeight: '80vh' }}
       >
-        <InfinitySpin visible={true} width="200" color="#fff" ariaLabel="infinity-spin-loading" />
+        <InfinitySpin width="200" color="#fff" />
       </figure>
     </Layout>
   );
