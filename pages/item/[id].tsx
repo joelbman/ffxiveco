@@ -11,6 +11,7 @@ import { WorldContext } from '../../context/WorldContext';
 import useUniversalis, { CraftMaterial } from '../../hooks/useUniversalis';
 import { toast } from 'react-toastify';
 import axios, { AxiosError } from 'axios';
+import Head from 'next/head';
 
 interface Item {
   craftQuantity: number;
@@ -115,6 +116,10 @@ const ItemDetail = () => {
 
   return (
     <Layout>
+      <Head>
+        <title>{item.name ? item.name + ' - ' : ''}FFXIV Eco</title>
+      </Head>
+
       <header className="flex items-center mb-8">
         <Image src={`https://xivapi.com/${item.icon}`} alt={item.name} height="64" width="64" />
         <h1 className="ml-4 mb-0">
