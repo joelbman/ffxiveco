@@ -3,9 +3,24 @@
     "iconId": "065109",
     "items": [
       {
-        "id": 41762,
-        "cost": 220,
+        "id": 41775,
+        "cost": 500,
         "name": "Gatherer's Guerdon Materia XII"
+      },
+      {
+        "id": 41776,
+        "cost": 500,
+        "name": "Gatherer's Guile Materia XII"
+      },
+      {
+        "id": 41777,
+        "cost": 500,
+        "name": "Gatherer's Grasp Materia XII"
+      },
+      {
+        "id": 41807,
+        "cost": 1000,
+        "name": "Rroneek Horn Token"
       }
     ]
   },
@@ -40,6 +55,16 @@
         "id": 41762,
         "cost": 250,
         "name": "Gatherer's Guerdon Materia XI"
+      },
+      {
+        "id": 41763,
+        "cost": 250,
+        "name": "Gatherer's Guile Materia XI"
+      },
+      {
+        "id": 41764,
+        "cost": 250,
+        "name": "Gatherer's Grasp Materia XI"
       },
       {
         "cost": 200,

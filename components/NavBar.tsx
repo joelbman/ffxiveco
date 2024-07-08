@@ -16,6 +16,24 @@ const DropdownItem = ({ href, children }: DropdownItemProps) => (
   </Link>
 );
 
+const SearchIcon = () => (
+  <svg
+    width="24px"
+    height="24px"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z"
+      stroke="#fff"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 const NavBar = () => {
   const router = useRouter();
   const { searchItem } = useXIVApi();
@@ -24,6 +42,7 @@ const NavBar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [results, setResults] = useState<any[]>([]);
   const { world, updateWorld } = useContext(WorldContext);
+  const [searchLoading, setSearchLoading] = useState(false);
 
   const changeWorld = (worldName: string) => {
     if (worldName === world) {
@@ -41,12 +60,19 @@ const NavBar = () => {
   };
 
   const xivDbSearch = async () => {
+    if (searchLoading) {
+      return;
+    }
+
+    setSearchLoading(true);
     const res = await searchItem(searchString);
 
     // Redirect to item page instantly if there's only one result
     if (res.data.Results.length === 1) {
+      setSearchLoading(false);
       router.push(`/item/${res.data.Results[0].ID}`);
     } else {
+      setSearchLoading(false);
       setResults(res.data.Results);
       setResultsOpen(true);
     }
@@ -85,7 +111,7 @@ const NavBar = () => {
                   style={{ maxWidth: '560px' }}
                   onMouseEnter={() => setShowDropdown(true)}
                 >
-                  <DropdownItem href="/conversion/tomestone/">Tomestone</DropdownItem>
+                  {/* <DropdownItem href="/conversion/tomestone/">Tomestone</DropdownItem> */}
                   <DropdownItem href="/conversion/crafter/">Crafter scrips</DropdownItem>
                   <DropdownItem href="/conversion/gatherer/">Gatherer scrips</DropdownItem>
                 </div>
@@ -94,18 +120,27 @@ const NavBar = () => {
           </section>
 
           <section className="relative">
-            <input
-              type="text"
-              value={searchString}
-              onChange={(e) => setSearchString(e.target.value)}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') {
-                  xivDbSearch();
-                }
-              }}
-              placeholder="Search for an item..."
-              style={{ maxWidth: '1024px' }}
-            />
+            <div className="flex">
+              <input
+                type="text"
+                value={searchString}
+                onChange={(e) => setSearchString(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    xivDbSearch();
+                  }
+                }}
+                placeholder="Search for an item..."
+                className="outline-none"
+                style={{ maxWidth: '1024px' }}
+              />
+              <figure
+                className="flex items-center p-2 cursor-pointer"
+                onClick={() => xivDbSearch()}
+              >
+                <SearchIcon />
+              </figure>
+            </div>
 
             {resultsOpen && (
               <div
@@ -119,7 +154,7 @@ const NavBar = () => {
                   <Link
                     href={`/item/${r.ID}`}
                     key={r.ID}
-                    className="flex items-center p-4 w-72"
+                    className="flex items-center p-4 w-72 hover:bg-gray-800"
                     onClick={() => setResultsOpen(false)}
                     passHref
                   >

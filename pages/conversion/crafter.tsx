@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import CurrencyTable from '../../components/CurrencyTable';
 import Error from '../../components/Error';
 import Layout from '../../components/Layout';
 import Loader from '../../components/Loader';
-import ItemIcon from '../../components/icons/ItemIcon';
 import { WorldContext } from '../../context/WorldContext';
 import scripData from '../../data/crafterScrips.json';
 import useUniversalis from '../../hooks/useUniversalis';
+import ScripSection from '../../components/ScripSection';
 
 const Crafter = () => {
   const { world } = useContext(WorldContext);
@@ -14,6 +13,7 @@ const Crafter = () => {
   const [error, setError] = useState(false);
   const { getCurrencyRatios } = useUniversalis(world);
   const [purpleScripData, setPurpleScripData] = useState<any>();
+  const [orangeScripData, setOrangeScripData] = useState<any>();
 
   useEffect(() => {
     if (!world) {
@@ -24,11 +24,19 @@ const Crafter = () => {
       setLoading(true);
       setError(false);
 
-      try {
-        const itemsP = await getCurrencyRatios(scripData.purple.items);
-        setPurpleScripData(itemsP);
-        setError(false);
-      } catch (e) {
+      const [purpleReq, orangeReq] = await Promise.allSettled([
+        getCurrencyRatios(scripData.purple.items),
+        getCurrencyRatios(scripData.orange.items),
+      ]);
+
+      if (orangeReq.status === 'fulfilled') {
+        setOrangeScripData(orangeReq.value);
+      }
+      if (purpleReq.status === 'fulfilled') {
+        setPurpleScripData(purpleReq.value);
+      }
+
+      if (orangeReq.status === 'rejected' && purpleReq.status === 'rejected') {
         setError(true);
       }
 
@@ -57,21 +65,17 @@ const Crafter = () => {
     <Layout>
       <h1>Crafter&apos;s scrip conversion rates</h1>
 
-      <div>
-        <h2 className="flex mb-0">
-          <ItemIcon
-            className="mr-2"
-            iconId={scripData.purple.iconId}
-            name="Purple Crafter's Scrip"
-          />
-          Purple scrips
-        </h2>
-        <CurrencyTable
-          data={purpleScripData}
-          iconId={scripData.purple.iconId}
-          name="Purple Crafter's Scrip"
-        />
-      </div>
+      {orangeScripData ? (
+        <ScripSection data={orangeScripData} name="Orange Crafter's Scrip" type="crafter" />
+      ) : (
+        <p>Failed to load Orange Scrip data - Universalis API might be under heavy load</p>
+      )}
+
+      {purpleScripData ? (
+        <ScripSection data={purpleScripData} name="Purple Crafter's Scrip" type="crafter" />
+      ) : (
+        <p>Failed to load Purple Scrip data - Universalis API might be under heavy load</p>
+      )}
     </Layout>
   );
 };

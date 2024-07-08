@@ -4,14 +4,44 @@
     "items": [
       {
         "cost": 500,
-        "id": 33927,
+        "id": 41778,
+        "name": "Craftsman's Competence Materia XII"
+      },
+      {
+        "cost": 500,
+        "id": 41779,
+        "name": "Craftsman's Cunning Materia XII"
+      },
+      {
+        "cost": 500,
+        "id": 41780,
         "name": "Craftsman's Command Materia XII"
+      },
+      {
+        "cost": 1000,
+        "id": 41146,
+        "name": "Hingan Rock Garden"
       }
     ]
   },
   "purple": {
     "iconId": "065088",
     "items": [
+      {
+        "cost": 250,
+        "id": 41765,
+        "name": "Craftsman's Competence Materia XI"
+      },
+      {
+        "cost": 250,
+        "id": 41766,
+        "name": "Craftsman's Cunning Materia XI"
+      },
+      {
+        "cost": 250,
+        "id": 41767,
+        "name": "Craftsman's Command Materia XI"
+      },
       {
         "cost": 200,
         "id": 25196,

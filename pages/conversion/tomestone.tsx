@@ -3,12 +3,10 @@ import CurrencyTable from '../../components/CurrencyTable';
 import Error from '../../components/Error';
 import Layout from '../../components/Layout';
 import Loader from '../../components/Loader';
-import GilIcon from '../../components/icons/GilIcon';
 import ItemIcon from '../../components/icons/ItemIcon';
 import { WorldContext } from '../../context/WorldContext';
 import tomestoneData from '../../data/tomestone.json';
 import useUniversalis from '../../hooks/useUniversalis';
-import { getRelativeTime } from '../../util/relativeTime';
 
 const Tomestone = () => {
   const { world } = useContext(WorldContext);
@@ -22,22 +20,22 @@ const Tomestone = () => {
       return;
     }
 
-    const fetchData = async () => {
-      setLoading(true);
-      setError(false);
+    // const fetchData = async () => {
+    //   setLoading(true);
+    //   setError(false);
 
-      try {
-        const items = await getCurrencyRatios(tomestoneData.Aphorism.items);
-        setData(items);
-        setError(false);
-      } catch (e) {
-        setError(true);
-      }
+    //   try {
+    //     const items = await getCurrencyRatios(tomestoneData.Aphorism.items);
+    //     setData(items);
+    //     setError(false);
+    //   } catch (e) {
+    //     setError(true);
+    //   }
 
-      setLoading(false);
-    };
+    //   setLoading(false);
+    // };
 
-    fetchData();
+    // fetchData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [world]);
@@ -58,8 +56,8 @@ const Tomestone = () => {
   return (
     <Layout>
       <h1>Tomestone conversion rates</h1>
-
-      <h2 className="flex">
+      Dawntrail update coming soon.
+      {/* <h2 className="flex">
         <ItemIcon
           className="mr-2"
           iconId={tomestoneData.Aphorism.iconId}
@@ -71,7 +69,7 @@ const Tomestone = () => {
         data={data}
         iconId={tomestoneData.Aphorism.iconId}
         name={tomestoneData.Aphorism.name}
-      />
+      /> */}
     </Layout>
   );
 };

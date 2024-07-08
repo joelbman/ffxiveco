@@ -7,6 +7,7 @@ import ItemIcon from '../../components/icons/ItemIcon';
 import { WorldContext } from '../../context/WorldContext';
 import scripData from '../../data/gathererScrips.json';
 import useUniversalis from '../../hooks/useUniversalis';
+import ScripSection from '../../components/ScripSection';
 
 const Gatherer = () => {
   const { world } = useContext(WorldContext);
@@ -14,6 +15,7 @@ const Gatherer = () => {
   const [error, setError] = useState(false);
   const { getCurrencyRatios } = useUniversalis(world);
   const [purpleScripData, setPurpleScripData] = useState<any>();
+  const [orangeScripData, setOrangeScripData] = useState<any>();
 
   useEffect(() => {
     if (!world) {
@@ -24,12 +26,19 @@ const Gatherer = () => {
       setLoading(true);
       setError(false);
 
-      try {
-        const itemsP = await getCurrencyRatios(scripData.purple.items);
-        setPurpleScripData(itemsP);
-        setError(false);
-      } catch (e) {
-        console.log(e);
+      const [purpleReq, orangeReq] = await Promise.allSettled([
+        getCurrencyRatios(scripData.purple.items),
+        getCurrencyRatios(scripData.orange.items),
+      ]);
+
+      if (orangeReq.status === 'fulfilled') {
+        setOrangeScripData(orangeReq.value);
+      }
+      if (purpleReq.status === 'fulfilled') {
+        setPurpleScripData(purpleReq.value);
+      }
+
+      if (orangeReq.status === 'rejected' && purpleReq.status === 'rejected') {
         setError(true);
       }
 
@@ -49,7 +58,7 @@ const Gatherer = () => {
     return (
       <Error>
         <h1>Error</h1>
-        <p>Error retrieving data.</p>
+        <p>Error retrieving data. Try again a bit later.</p>
       </Error>
     );
   }
@@ -63,31 +72,17 @@ const Gatherer = () => {
         can be worth investing in to but it&apos;s better to check the current prices in-game.
       </p>
 
-      <div>
-        <h2 className="flex">
-          <ItemIcon
-            className="mr-2"
-            iconId={scripData.purple.iconId}
-            name="Purple Gatherer's Scrip"
-          />
-          Purple scrips
-        </h2>
+      {orangeScripData ? (
+        <ScripSection data={orangeScripData} name="Orange Gatherer's Scrip" type="gatherer" />
+      ) : (
+        <p>Failed to load Orange Scrip data - Universalis API might be under heavy load</p>
+      )}
 
-        <h3>Materia & Materials</h3>
-        <CurrencyTable
-          data={purpleScripData}
-          iconId={scripData.purple.iconId}
-          name="Purple Gatherer's Scrip"
-        />
-
-        {/* <h3>Fishing bait</h3>
-        <CurrencyTable
-          data={purpleScripData}
-          bait
-          iconId={scripData.purple.iconId}
-          name="Purple Gatherer's Scrip"
-        /> */}
-      </div>
+      {purpleScripData ? (
+        <ScripSection data={purpleScripData} name="Purple Gatherer's Scrip" type="gatherer" />
+      ) : (
+        <p>Failed to load Purple Scrip data - Universalis API might be under heavy load</p>
+      )}
     </Layout>
   );
 };
