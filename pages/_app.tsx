@@ -1,6 +1,6 @@
 import '../styles/globals.css';
 import 'react-tabs/style/react-tabs.css';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import { useEffect, useState } from 'react';
 import { WorldContext } from '../context/WorldContext';
@@ -20,7 +20,7 @@ const App = ({ Component, pageProps }: any) => {
   return (
     <WorldContext.Provider value={{ world, updateWorld: setWorld }}>
       <Component {...pageProps} />
-      <ToastContainer />
+      <ToastContainer containerId={'toastcontainer'} position="bottom-center" closeOnClick />
     </WorldContext.Provider>
   );
 };

@@ -1,12 +1,15 @@
 import Head from 'next/head';
 import Footer from './Footer';
 import NavBar from './NavBar';
+import { toast } from 'react-toastify';
 
 interface Props {
   children: React.ReactNode;
 }
 
 const Layout = ({ children }: Props) => {
+  toast('test');
+
   return (
     <div>
       <Head>
