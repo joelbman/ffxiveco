@@ -1,22 +1,57 @@
 {
-  "Chaos": [
-    "Cerberus",
-    "Moogle",
-    "Louisoux",
-    "Omega",
-    "Ragnarok",
-    "Spriggan",
-    "Sagittarius",
-    "Phantom"
-
-  ],
-  "Light": [
-    "Alpha",
-    "Lich",
-    "Odin",
-    "Phoenix",
-   "Raiden",
-    "Shiva",
-    "Zodiark"
-  ]
+  "EU": {
+    "Chaos": [
+      "Cerberus",
+      "Moogle",
+      "Louisoux",
+      "Omega",
+      "Ragnarok",
+      "Spriggan",
+      "Sagittarius",
+      "Phantom"
+    ],
+    "Light": ["Alpha", "Lich", "Odin", "Phoenix", "Raiden", "Shiva", "Twintania", "Zodiark"]
+  },
+  "NA": {
+    "Aether": [
+      "Adamantoise",
+      "Cactuar",
+      "Faerie",
+      "Gilgamesh",
+      "Jenova",
+      "Midgardsormr",
+      "Sargatanas",
+      "Siren"
+    ],
+    "Crystal": [
+      "Balmung",
+      "Brynhildr",
+      "Coeurl",
+      "Diabolos",
+      "Goblin",
+      "Malboro",
+      "Mateus",
+      "Zalera"
+    ],
+    "Dynamis": [
+      "Cuchulainn",
+      "Golem",
+      "Halicarnassus",
+      "Kraken",
+      "Maduin",
+      "Marilith",
+      "Rafflesia",
+      "Seraph"
+    ],
+    "Primal": [
+      "Behemoth",
+      "Excalibur",
+      "Exodus",
+      "Famfrit",
+      "Hyperion",
+      "Lamia",
+      "Leviathan",
+      "Ultros"
+    ]
+  }
 }

@@ -10,7 +10,6 @@ import GilIcon from '../../components/icons/GilIcon';
 import { WorldContext } from '../../context/WorldContext';
 import useUniversalis, { CraftMaterial } from '../../hooks/useUniversalis';
 import { toast } from 'react-toastify';
-import axios, { AxiosError } from 'axios';
 import Head from 'next/head';
 
 interface Item {
@@ -81,15 +80,12 @@ const ItemDetail = () => {
       setLoading(true);
       setError(false);
 
-      try {
-        const data = await getCraftingCost(itemId);
+      const data = await getCraftingCost(itemId);
+
+      if (data.name && (data.avgPriceHQ || data.avgPriceNQ)) {
         setItem(data);
-      } catch (e) {
-        if (axios.isAxiosError(e) && e.response?.status === 504) {
-          toast.error('Universalis API request timed out - try again in a bit');
-        } else {
-          setError(true);
-        }
+      } else {
+        setError(true);
       }
 
       setLoading(false);
@@ -109,7 +105,10 @@ const ItemDetail = () => {
     return (
       <Error>
         <h1>Error</h1>
-        <p>Item data not found. Maybe the item is not marketable?</p>
+        <p>
+          Item data not found. Maybe the item is not marketable? Universalis API might also be under
+          heavy load - in this case try again in a few minutes.
+        </p>
       </Error>
     );
   }

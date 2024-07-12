@@ -4,6 +4,8 @@ import Link from 'next/link';
 import React, { useContext, useState } from 'react';
 import { WorldContext } from '../context/WorldContext';
 import useXIVApi from '../hooks/useXIVApi';
+import worlds from '../data/worlds.json';
+import { validateContinent } from '../pages/_app';
 
 interface DropdownItemProps {
   href: string;
@@ -41,7 +43,7 @@ const NavBar = () => {
   const [resultsOpen, setResultsOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [results, setResults] = useState<any[]>([]);
-  const { world, updateWorld } = useContext(WorldContext);
+  const { world, updateWorld, continent, updateContinent } = useContext(WorldContext);
   const [searchLoading, setSearchLoading] = useState(false);
 
   const changeWorld = (worldName: string) => {
@@ -57,6 +59,21 @@ const NavBar = () => {
     if (router.pathname.includes(prevWorld)) {
       router.push(router.pathname.replace(prevWorld, worldName));
     }
+  };
+
+  const changeContinent = (continentName: string) => {
+    if (continentName === continent) {
+      return;
+    }
+
+    if (continentName === 'NA') {
+      updateWorld('Adamantoise');
+    } else {
+      updateWorld('Cerberus');
+    }
+
+    localStorage.setItem('continent', continentName);
+    updateContinent(validateContinent(continentName));
   };
 
   const xivDbSearch = async () => {
@@ -171,25 +188,61 @@ const NavBar = () => {
             )}
           </section>
 
-          <section>
+          <section className="flex gap-4">
+            <select value={continent} onChange={(e) => changeContinent(e.target.value)}>
+              <option value="EU">EU</option>
+              <option value="NA">NA</option>
+            </select>
             <select value={world} onChange={(e) => changeWorld(e.target.value)}>
-              <option disabled>Chaos</option>
-              <option value="Cerberus">Cerberus</option>
-              <option value="Moogle">Moogle</option>
-              <option value="Louisoux">Louisoix</option>
-              <option value="Omega">Omega</option>
-              <option value="Ragnarok">Ragnarok</option>
-              <option value="Spriggan">Spriggan</option>
-              <option value="Sagittarius">Sagittarius</option>
-              <option value="Phantom">Phantom</option>
-              <option disabled>Light</option>
-              <option value="Alpha">Alpha</option>
-              <option value="Lich">Lich</option>
-              <option value="Odin">Odin</option>
-              <option value="Phoenix">Phoenix</option>
-              <option value="Raiden">Raiden</option>
-              <option value="Shiva">Shiva</option>
-              <option value="Zodiark">Zodiark</option>
+              {continent === 'EU' && (
+                <>
+                  <option disabled>Chaos</option>
+                  {worlds.EU.Chaos.map((w, i) => (
+                    <option key={i} value={w}>
+                      {w}
+                    </option>
+                  ))}
+
+                  <option disabled>Light</option>
+                  {worlds.EU.Light.map((w, i) => (
+                    <option key={i} value={w}>
+                      {w}
+                    </option>
+                  ))}
+                </>
+              )}
+
+              {continent === 'NA' && (
+                <>
+                  <option disabled>Aether</option>
+                  {worlds.NA.Aether.map((w, i) => (
+                    <option key={i} value={w}>
+                      {w}
+                    </option>
+                  ))}
+
+                  <option disabled>Crystal</option>
+                  {worlds.NA.Crystal.map((w, i) => (
+                    <option key={i} value={w}>
+                      {w}
+                    </option>
+                  ))}
+
+                  <option disabled>Dynamis</option>
+                  {worlds.NA.Dynamis.map((w, i) => (
+                    <option key={i} value={w}>
+                      {w}
+                    </option>
+                  ))}
+
+                  <option disabled>Primal</option>
+                  {worlds.NA.Primal.map((w, i) => (
+                    <option key={i} value={w}>
+                      {w}
+                    </option>
+                  ))}
+                </>
+              )}
             </select>
           </section>
         </div>
