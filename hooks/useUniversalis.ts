@@ -30,6 +30,9 @@ interface CurrencyItem {
 }
 
 const getAveragePrice = (listings: Listing[]) => {
+  if (!listings) {
+    return 0;
+  }
   const sum = listings.reduce((a: number, b: Listing) => a + b['pricePerUnit'], 0);
   return Math.round(sum / listings.length);
 };
@@ -69,6 +72,7 @@ const useUniversalis = (world: string) => {
       craftQuantity: 0,
       craftingCost: 0,
       materials: [] as CraftMaterial[],
+      materialsError: false,
     };
 
     const [universalisNQ, universalisHQ, xivreq] = await Promise.allSettled([
@@ -123,24 +127,31 @@ const useUniversalis = (world: string) => {
         formattedResponse.craftQuantity = recipeReq.data.AmountResult;
 
         const materialPrices = await getItemPrices(materialIds, { listings: 3 });
-        formattedResponse.materials = Object.values(materialPrices?.data.items).map(
-          (material: any) => {
-            const matIndex = formattedResponse.materials.findIndex((m) => m.id === material.itemID);
-            const avgPrice = getAveragePrice(material.listings);
 
-            return {
-              ...formattedResponse.materials[matIndex],
-              avgPrice,
-              updated: getRelativeTime(material.lastUploadTime),
-              avgTotalPrice: Math.round(avgPrice * formattedResponse.materials[matIndex].amount),
-            };
-          }
-        );
+        if (materialPrices?.data.items) {
+          formattedResponse.materials = Object.values(materialPrices?.data.items).map(
+            (material: any) => {
+              const matIndex = formattedResponse.materials.findIndex(
+                (m) => m.id === material.itemID
+              );
+              const avgPrice = getAveragePrice(material.listings);
 
-        formattedResponse.craftingCost = formattedResponse.materials.reduce(
-          (a, b) => a + b['avgTotalPrice'],
-          0
-        );
+              return {
+                ...formattedResponse.materials[matIndex],
+                avgPrice,
+                updated: getRelativeTime(material.lastUploadTime),
+                avgTotalPrice: Math.round(avgPrice * formattedResponse.materials[matIndex].amount),
+              };
+            }
+          );
+
+          formattedResponse.craftingCost = formattedResponse.materials.reduce(
+            (a, b) => a + b['avgTotalPrice'],
+            0
+          );
+        } else {
+          formattedResponse.materialsError = true;
+        }
 
         formattedResponse.profitNQ = Math.round(
           formattedResponse.avgPriceNQ * formattedResponse.craftQuantity -

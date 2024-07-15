@@ -19,6 +19,7 @@ interface Item {
   profitNQ: number;
   avgPriceHQ: number;
   avgPriceNQ: number;
+  materialsError?: boolean;
 }
 
 interface TabContentProps {
@@ -41,20 +42,24 @@ const TabContent = ({ item, hq }: TabContentProps) => (
 
     {item.profitHQ || item.profitNQ ? (
       <div className="flex items-center text-xl mt-4">
-        <div>
-          Profit/Loss per craft:{' '}
-          {hq && (
-            <span className={item.profitHQ > 0 ? 'text-green-500' : 'text-red-500'}>
-              {item.profitHQ}
-            </span>
-          )}
-          {!hq && (
-            <span className={item.profitNQ > 0 ? 'text-green-500' : 'text-red-500'}>
-              {item.profitNQ}
-            </span>
-          )}
-        </div>
-        <GilIcon />
+        {item.materialsError ? (
+          <div>Profit/Loss per craft: N/A</div>
+        ) : (
+          <div className="flex items-center">
+            <span className="mr-2">Profit/Loss per craft:</span>
+            {hq && (
+              <span className={item.profitHQ > 0 ? 'text-green-500' : 'text-red-500'}>
+                {item.profitHQ}
+              </span>
+            )}
+            {!hq && (
+              <span className={item.profitNQ > 0 ? 'text-green-500' : 'text-red-500'}>
+                {item.profitNQ}
+              </span>
+            )}
+            <GilIcon />
+          </div>
+        )}
       </div>
     ) : (
       <div className="mt-6 italic">More details on non-craftable items coming soon.</div>
@@ -88,6 +93,8 @@ const ItemDetail = () => {
         setError(true);
       }
 
+      toast('test');
+
       setLoading(false);
     };
 
@@ -107,7 +114,7 @@ const ItemDetail = () => {
         <h1>Error</h1>
         <p>
           Item data not found. Maybe the item is not marketable? Universalis API might also be under
-          heavy load - in this case try again in a few minutes.
+          heavy load, in that case try again in a few minutes.
         </p>
       </Error>
     );
@@ -150,7 +157,14 @@ const ItemDetail = () => {
         )}
       </Tabs>
 
-      {item.materials.length > 0 && (
+      {item.materialsError && (
+        <p className="mt-8">
+          Could not receive material prices. Universalis API might be under heavy load, try again in
+          a few minutes.
+        </p>
+      )}
+
+      {item.materials.length > 0 && !item.materialsError && (
         <div>
           <h2 className="mt-8">Materials</h2>
 

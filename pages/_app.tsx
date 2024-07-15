@@ -27,7 +27,14 @@ const App = ({ Component, pageProps }: any) => {
       value={{ world, updateWorld: setWorld, continent, updateContinent: setContinent }}
     >
       <Component {...pageProps} />
-      <ToastContainer containerId={'toastcontainer'} position="bottom-center" closeOnClick />
+      <ToastContainer
+        containerId={'toastcontainer'}
+        className={
+          'relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer'
+        }
+        position="bottom-center"
+        closeOnClick
+      />
     </WorldContext.Provider>
   );
 };
